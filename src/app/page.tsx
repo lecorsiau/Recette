@@ -78,7 +78,18 @@ export default function HomePage() {
         .from("recipes")
         .select("*")
         .order("created_at", { ascending: false });
-      setRecipes(data ?? []);
+
+      // Seed les recettes de base si le carnet est vide
+      if ((data ?? []).length === 0) {
+        await fetch("/api/seed", { method: "POST" });
+        const { data: seeded } = await supabase
+          .from("recipes")
+          .select("*")
+          .order("created_at", { ascending: false });
+        setRecipes(seeded ?? []);
+      } else {
+        setRecipes(data ?? []);
+      }
       setLoading(false);
     };
     init();
