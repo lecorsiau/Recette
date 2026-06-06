@@ -1,9 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Recettes Végé · TM5",
   description: "Mon carnet de recettes végétariennes et veganes, compatible Thermomix TM5",
+};
+
+export const viewport: Viewport = {
   themeColor: "#009245",
 };
 

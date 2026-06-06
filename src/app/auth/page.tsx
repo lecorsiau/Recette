@@ -1,5 +1,7 @@
 import AuthForm from "@/components/AuthForm";
 
+export const dynamic = "force-dynamic";
+
 export default function AuthPage() {
   return (
     <div className="min-h-screen bg-tm-green-light flex flex-col items-center justify-center px-5">
