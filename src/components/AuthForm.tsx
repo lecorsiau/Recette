@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase";
 
 export default function AuthForm() {
@@ -9,14 +10,19 @@ export default function AuthForm() {
   const [error, setError] = useState<string | null>(null);
 
   const supabase = createClient();
+  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) setError("Email ou mot de passe incorrect.");
-    setLoading(false);
+    if (error) {
+      setError("Email ou mot de passe incorrect.");
+      setLoading(false);
+    } else {
+      router.replace("/");
+    }
   };
 
   return (
